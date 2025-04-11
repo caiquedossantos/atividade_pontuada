@@ -1,18 +1,18 @@
-package atividade.aula.model;
+package atividade.aula.model; // Pacote onde a classe está localizada
 
-
+// Importações para JPA e validações
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
+@Entity // Define que essa classe é uma entidade JPA (vai virar uma tabela no banco)
 public class Funcionario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Define o campo 'id' como chave primária
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Geração automática do ID pelo banco
     private long id;
 
-    @NotBlank(message = "Não deve ser vazio")
+    @NotBlank(message = "Não deve ser vazio") // Validação: campo obrigatório e não pode ser só espaços
     private String nome;
 
     @NotBlank(message = "Não deve ser vazio")
@@ -21,27 +21,29 @@ public class Funcionario {
     @NotBlank(message = "Não deve ser vazio")
     private String dataNascimento;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Salva o nome do enum no banco
     private Sexo sexo;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Salva o nome do enum no banco
     private Setor setor;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) // Salva o nome do enum no banco
     private EstadoCivil estadoCivil;
 
-    @NotNull
+    @NotNull // Validação: não pode ser nulo
     private double salario;
 
     @NotBlank(message = "Não deve ser vazio")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL) // Associação  com Endereco, com cascade total
     private Endereco endereco;
 
+    // Construtor padrão necessário para o JPA
     public Funcionario() {
     }
 
+    // Construtor completo com todos os atributos
     public Funcionario(long id, String nome, String cpf, String dataNascimento, Sexo sexo, Setor setor, EstadoCivil estadoCivil, double salario, String email, Endereco endereco) {
         this.id = id;
         this.nome = nome;
@@ -54,6 +56,8 @@ public class Funcionario {
         this.email = email;
         this.endereco = endereco;
     }
+
+    // Getters e setters para acessar e atualizar os atributos
 
     public long getId() {
         return id;
